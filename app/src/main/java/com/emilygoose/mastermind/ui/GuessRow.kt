@@ -14,10 +14,11 @@ import com.emilygoose.mastermind.GuessColor
 
 @Composable
 fun GuessRow(
-    guess: List<GuessColor>,
-    locked: Boolean,
-    onColorClick: (Int) -> Unit = {},
-    onSubmit: () -> Unit = {}
+    guess: List<GuessColor>, // Guess to display in the row
+    locked: Boolean, // Whether the row is locked - Unlocked row is editable to guess
+    pegs: Pair<Int, Int> = Pair(0,0), // Pegs to display with a locked guess
+    onColorClick: (Int) -> Unit = {}, // Callback for color being clicked
+    onSubmit: () -> Unit = {} // Callback for guess being submitted
 ) {
     Row(
         modifier = Modifier.height(64.dp)
