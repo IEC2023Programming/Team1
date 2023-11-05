@@ -1,6 +1,7 @@
 package com.emilygoose.mastermind
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 
@@ -9,8 +10,8 @@ class MainActivityViewModel : ViewModel() {
     val guesses = mutableListOf<List<GuessColor>>()
     var guessCount = 0
 
-    // MutableState of current guess (Use indices so we can increment)
-    val currentGuessIndices = mutableListOf(0, 0, 0, 0)
+    // Current indices for the guess
+    val currentGuess = mutableStateListOf(0, 0, 0, 0)
 
     init {
         guesses.add(listOf(GuessColor.RED, GuessColor.BLUE, GuessColor.CYAN, GuessColor.PURPLE))
@@ -24,12 +25,14 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun incrementGuess(index: Int) {
-        val currentColor = currentGuessIndices[index]
+        val currentColor = currentGuess[index]
         // Increment current colour, wrap around if above max index for guess colors
         if (currentColor + 1 >= GuessColor.values().size) {
-            currentGuessIndices[index] = 0
+            Log.d("VM", "Incrementing index $index by 1, wrap to 0")
+            currentGuess[index] = 0
         } else {
-            currentGuessIndices[index] = currentColor + 1
+            Log.d("VM", "Incrementing index $index by 1, new value ${currentColor + 1}")
+            currentGuess[index] = currentColor + 1
         }
     }
 

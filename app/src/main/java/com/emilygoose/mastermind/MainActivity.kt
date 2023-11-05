@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                         GuessRow(
                             guess =
                             // Map indices from the mutableList to colors
-                            viewModel.currentGuessIndices.map { index ->
+                            viewModel.currentGuess.map { index ->
                                 GuessColor.values()[index]
                             },
                             locked = false,
