@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 class MainActivityViewModel : ViewModel() {
     // Set of guesses - mutableListOf maintains order
     val guesses = mutableStateListOf<List<GuessColor>>()
-    var guessCount = 0
 
     // Current indices for the guess
     val currentGuess = mutableStateListOf(0, 0, 0, 0)
@@ -33,7 +32,7 @@ class MainActivityViewModel : ViewModel() {
         )
     }
 
-    private val secretCode: List<GuessColor> = listOf(GuessColor.RED, GuessColor.GREEN, GuessColor.BLUE, GuessColor.CYAN)
+    val secretCode: List<GuessColor> = listOf(GuessColor.RED, GuessColor.GREEN, GuessColor.BLUE, GuessColor.CYAN)
 
     fun getPegs(guess: List<GuessColor>): Pair<Int, Int> {
         var black = 0

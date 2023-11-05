@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.QuestionMark
+import androidx.compose.material.icons.filled.TaskAlt
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -35,14 +35,14 @@ fun GuessRow(
         // If locked - Display result
         // If not locked - Display submit button
         if (locked) {
-            // TODO Guess and check thingies
+            GuessResult(pegs)
         } else {
             IconButton(
                 onClick = onSubmit,
                 modifier = Modifier.size(64.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Filled.QuestionMark,
+                    imageVector = Icons.Filled.TaskAlt,
                     contentDescription = "Submit guess"
                 )
             }
