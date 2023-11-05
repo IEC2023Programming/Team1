@@ -108,7 +108,7 @@ class MainActivityViewModel : ViewModel() {
     }
 
     // Randomly generates a secret code
-    fun generateSecret(): List<GuessColor> {
+    private fun generateSecret(): List<GuessColor> {
         val guessList = GuessColor.values()
             .toList()
             .subList(0,COLOR_SET) // Take sublist of only first n colors
