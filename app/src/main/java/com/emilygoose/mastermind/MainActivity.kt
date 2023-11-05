@@ -41,6 +41,9 @@ class MainActivity : ComponentActivity() {
                             locked = false,
                             onColorClick = { index ->
                                 viewModel.incrementGuess(index)
+                            },
+                            onSubmit = {
+                                viewModel.submitGuess()
                             }
                         )
                     }

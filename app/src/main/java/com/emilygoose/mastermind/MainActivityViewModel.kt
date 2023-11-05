@@ -7,22 +7,11 @@ import androidx.lifecycle.ViewModel
 
 class MainActivityViewModel : ViewModel() {
     // Set of guesses - mutableListOf maintains order
-    val guesses = mutableListOf<List<GuessColor>>()
+    val guesses = mutableStateListOf<List<GuessColor>>()
     var guessCount = 0
 
     // Current indices for the guess
     val currentGuess = mutableStateListOf(0, 0, 0, 0)
-
-    init {
-        guesses.add(listOf(GuessColor.RED, GuessColor.BLUE, GuessColor.CYAN, GuessColor.PURPLE))
-        guesses.add(listOf(GuessColor.YELLOW, GuessColor.RED, GuessColor.CYAN, GuessColor.PURPLE))
-        guesses.add(listOf(GuessColor.GREEN, GuessColor.YELLOW, GuessColor.PURPLE, GuessColor.CYAN))
-        guesses.add(listOf(GuessColor.GREEN, GuessColor.YELLOW, GuessColor.PURPLE, GuessColor.CYAN))
-        guesses.add(listOf(GuessColor.GREEN, GuessColor.YELLOW, GuessColor.PURPLE, GuessColor.CYAN))
-        guesses.add(listOf(GuessColor.GREEN, GuessColor.YELLOW, GuessColor.PURPLE, GuessColor.CYAN))
-        guesses.add(listOf(GuessColor.GREEN, GuessColor.YELLOW, GuessColor.PURPLE, GuessColor.CYAN))
-        guesses.add(listOf(GuessColor.GREEN, GuessColor.YELLOW, GuessColor.PURPLE, GuessColor.CYAN))
-    }
 
     fun incrementGuess(index: Int) {
         val currentColor = currentGuess[index]
@@ -34,6 +23,15 @@ class MainActivityViewModel : ViewModel() {
             Log.d("VM", "Incrementing index $index by 1, new value ${currentColor + 1}")
             currentGuess[index] = currentColor + 1
         }
+    }
+
+    fun submitGuess() {
+        // Add list to guesses
+        guesses.add(
+            currentGuess.map { index ->
+                GuessColor.values()[index]
+            }
+        )
     }
 
     val secretCode: List<Color>? = null
