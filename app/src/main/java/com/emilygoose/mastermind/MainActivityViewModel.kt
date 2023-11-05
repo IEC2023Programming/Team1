@@ -64,30 +64,8 @@ class MainActivityViewModel : ViewModel() {
         return Pair(black, white)
     }
 
-//    fun guess_score(guess: MutableList<Color>): Pair<Int, Int> {
-//        if (secretCode == null) {
-//            Log.e("fun: guess_secret", "Secret is null")
-//            return Pair(-1, -1)
-//        }
-//        var tempSecret=secretCode.toMutableList()
-//        var black = 0
-//        var white = 0
-//        //If index and colour match - increment black by one and set given colour to unspecified
-//        for (i in 0..guess.size) {
-//            if (guess[i] == tempSecret[i]) {
-//                black++
-//                tempSecret[i] = Color.Unspecified
-//            }
-//        }
-//
-//        //If colour is found - increment white by one and set given colour to unspecified
-//        for (i in 0..guess.size) {
-//            if (tempSecret.indexOf(guess[i]) != -1) {
-//                white++
-//                tempSecret[tempSecret.indexOf(guess[i])]=Color.Unspecified
-//            }
-//        }
-//        guessCount++
-//        return Pair(black, white)
-//    }
+    fun generate_guess(): List<GuessColor> {
+        val guessList = GuessColor.values().toList().shuffled()
+        return guessList.subList(0, 3)
+    }
 }
