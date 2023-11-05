@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.emilygoose.mastermind.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ResultAlertDialog(
     onConfirmation: () -> Unit,

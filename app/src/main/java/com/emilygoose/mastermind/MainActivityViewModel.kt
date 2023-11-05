@@ -8,7 +8,7 @@ import com.emilygoose.mastermind.data.GuessColor
 
 class MainActivityViewModel : ViewModel() {
     // Number of possible colors in the game
-    private val COLOR_SET = 6
+    private val colorSet = 6
 
     // Set of guesses - mutableListOf maintains order
     val guesses = mutableStateListOf<List<GuessColor>>()
@@ -51,7 +51,7 @@ class MainActivityViewModel : ViewModel() {
     fun incrementGuess(index: Int) {
         val currentColor = currentGuess[index]
         // Increment current colour, wrap around if above max index for guess colors
-        if (currentColor + 1 >= COLOR_SET) {
+        if (currentColor + 1 >= colorSet) {
             Log.d("VM", "Incrementing index $index by 1, wrap to 0")
             currentGuess[index] = 0
         } else {
@@ -111,7 +111,7 @@ class MainActivityViewModel : ViewModel() {
     private fun generateSecret(): List<GuessColor> {
         val guessList = GuessColor.values()
             .toList()
-            .subList(0,COLOR_SET) // Take sublist of only first n colors
+            .subList(0,colorSet) // Take sublist of only first n colors
             .shuffled()
         return guessList.subList(0, 4)
     }
