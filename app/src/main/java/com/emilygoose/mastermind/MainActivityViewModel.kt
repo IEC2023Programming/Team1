@@ -3,7 +3,6 @@ package com.emilygoose.mastermind
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import com.emilygoose.mastermind.data.GuessColor
 
@@ -69,14 +68,15 @@ class MainActivityViewModel : ViewModel() {
     }
 
     // Gets the black/white pegs for a given guess
-    fun getPegs(guess: List<GuessColor>): Pair<Int, Int> {
+    // secret is optional defaulting to secretCode so we can pass manually for unit testing
+    fun getPegs(guess: List<GuessColor>, secret: List<GuessColor> = secretCode): Pair<Int, Int> {
         var black = 0
         var white = 0
         val guessed = mutableListOf<GuessColor>()
         // Iterate over the guess
         for (index in guess.indices) {
             // Check for exact hit
-            if (guess[index] == secretCode[index]) {
+            if (guess[index] == secret[index]) {
                 // Exact hit - Increment black
                 black ++
                 // If we've seen this color already remove the inexact match
@@ -85,7 +85,7 @@ class MainActivityViewModel : ViewModel() {
                 } else {
                     guessed.add(guess[index])
                 }
-            } else if (secretCode.contains(guess[index])) {
+            } else if (secret.contains(guess[index])) {
                 // Make sure we haven't exact matched this color before
                 if (!guessed.contains(guess[index])) {
                     // Match somewhere - Increment white
@@ -105,11 +105,5 @@ class MainActivityViewModel : ViewModel() {
             .subList(0,COLOR_SET) // Take sublist of only first n colors
             .shuffled()
         return guessList.subList(0, 4)
-    }
-}
-
-fun SnapshotStateList<Int>.toColors(): List<GuessColor> {
-    return this.map { index ->
-        GuessColor.values()[index]
     }
 }
