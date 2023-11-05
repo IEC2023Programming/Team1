@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.emilygoose.mastermind.data.GuessColor
 
 class MainActivityViewModel : ViewModel() {
     // Set of guesses - mutableListOf maintains order

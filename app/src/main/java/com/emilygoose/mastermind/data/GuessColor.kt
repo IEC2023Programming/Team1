@@ -1,4 +1,4 @@
-package com.emilygoose.mastermind
+package com.emilygoose.mastermind.data
 
 import androidx.compose.ui.graphics.Color
 

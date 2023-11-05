@@ -15,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.emilygoose.mastermind.data.GuessColor
 import com.emilygoose.mastermind.ui.GuessRow
 import com.emilygoose.mastermind.ui.theme.MastermindTheme
 

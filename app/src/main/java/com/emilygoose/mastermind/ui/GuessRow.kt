@@ -10,7 +10,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.emilygoose.mastermind.GuessColor
+import com.emilygoose.mastermind.data.GuessColor
 
 @Composable
 fun GuessRow(
