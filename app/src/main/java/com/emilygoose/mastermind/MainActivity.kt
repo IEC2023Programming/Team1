@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
                                     locked = false,
                                     // Callback to increment guess colors on click
                                     onColorClick = { index ->
-                                        viewModel.incrementGuess(index)
+                                        viewModel.incrementGuessColor(index)
                                     },
                                     // Callback for when submit button is clicked
                                     onSubmit = {

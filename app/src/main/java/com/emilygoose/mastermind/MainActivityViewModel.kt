@@ -48,7 +48,7 @@ class MainActivityViewModel : ViewModel() {
     }
 
     // Increments the color in the guess selection row
-    fun incrementGuess(index: Int) {
+    fun incrementGuessColor(index: Int) {
         val currentColor = currentGuess[index]
         // Increment current colour, wrap around if above max index for guess colors
         if (currentColor + 1 >= colorSet) {
