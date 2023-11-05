@@ -30,8 +30,19 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         for (guess in viewModel.guesses) {
-                            GuessRow(guess)
+                            GuessRow(guess, true)
                         }
+                        GuessRow(
+                            guess =
+                            // Map indices from the mutableList to colors
+                            viewModel.currentGuessIndices.map { index ->
+                                GuessColor.values()[index]
+                            },
+                            locked = false,
+                            onColorClick = { index ->
+                                viewModel.incrementGuess(index)
+                            }
+                        )
                     }
                 }
             }

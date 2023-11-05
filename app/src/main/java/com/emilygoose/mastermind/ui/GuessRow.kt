@@ -16,6 +16,14 @@ fun GuessRow(
     Row(
         modifier = Modifier.height(64.dp)
     ) {
-        ColorRow(guess)
+        ColorRow(
+            guess,
+            onColorClick = { index ->
+                // If the row is not locked pass the click up the function
+                if (!locked) {
+                    onColorClick(index)
+                }
+            }
+        )
     }
 }

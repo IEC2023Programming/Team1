@@ -25,6 +25,10 @@ fun ColorRow(
                 modifier = Modifier
                     .size(64.dp)
                     .padding(8.dp),
+                onClick = {
+                    // Click event with index
+                    onColorClick(index)
+                }
             )
         }
     }
