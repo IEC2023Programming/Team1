@@ -2,6 +2,7 @@ package com.emilygoose.mastermind
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
 class MainActivityViewModel : ViewModel() {
@@ -11,6 +12,32 @@ class MainActivityViewModel : ViewModel() {
     // Current indices for the guess
     val currentGuess = mutableStateListOf(0, 0, 0, 0)
 
+    // Secret code for the player to guess
+    var secretCode: List<GuessColor>
+        private set
+
+    // Flag for if the user can enter a new guess
+    var canGuess = mutableStateOf(true)
+        private set
+
+    init {
+        // Generate the first secret code
+        secretCode = generateSecret()
+    }
+
+    // Resets game state and all guesses
+    fun resetGame() {
+        // Reset current guess to default
+        currentGuess.fill(0)
+        // Remove all guesses from last game
+        guesses.clear()
+        // Generate a new secret code
+        secretCode = generateSecret()
+        // Allow guessing
+        canGuess.value = true
+    }
+
+    // Increments the color in the guess selection row
     fun incrementGuess(index: Int) {
         val currentColor = currentGuess[index]
         // Increment current colour, wrap around if above max index for guess colors
@@ -23,17 +50,22 @@ class MainActivityViewModel : ViewModel() {
         }
     }
 
+    // Submits a guess to list of current guesses
     fun submitGuess() {
+        val currentGuessColors = currentGuess.map { index ->
+            GuessColor.values()[index]
+        }
         // Add list to guesses
         guesses.add(
-            currentGuess.map { index ->
-                GuessColor.values()[index]
-            }
+            currentGuessColors
         )
+        // If game is won or if too many guesses, disable guessing
+        if (guesses.size >= 10 || currentGuessColors == secretCode) {
+            canGuess.value = false
+        }
     }
 
-    val secretCode: List<GuessColor> = listOf(GuessColor.RED, GuessColor.GREEN, GuessColor.BLUE, GuessColor.CYAN)
-
+    // Gets the black/white pegs for a given guess
     fun getPegs(guess: List<GuessColor>): Pair<Int, Int> {
         var black = 0
         var white = 0
@@ -63,8 +95,9 @@ class MainActivityViewModel : ViewModel() {
         return Pair(black, white)
     }
 
-    fun generate_guess(): List<GuessColor> {
+    // Randomly generates a secret code
+    fun generateSecret(): List<GuessColor> {
         val guessList = GuessColor.values().toList().shuffled()
-        return guessList.subList(0, 3)
+        return guessList.subList(0, 4)
     }
 }

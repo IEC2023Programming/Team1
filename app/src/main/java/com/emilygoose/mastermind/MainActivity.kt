@@ -36,8 +36,8 @@ class MainActivity : ComponentActivity() {
                                 locked = true
                             )
                         }
-                        // If we haven't reached 10 guesses, let the user guess
-                        if (viewModel.guesses.size < 10) {
+                        // Show unlocked guessable row if allowed to guess
+                        if (viewModel.canGuess.value) {
                             GuessRow(
                                 guess =
                                 // Map indices from the mutableList to colors
@@ -45,13 +45,18 @@ class MainActivity : ComponentActivity() {
                                     GuessColor.values()[index]
                                 },
                                 locked = false,
+                                // Callback to increment guess colors on click
                                 onColorClick = { index ->
                                     viewModel.incrementGuess(index)
                                 },
+                                // Callback for when submit button is clicked
                                 onSubmit = {
                                     viewModel.submitGuess()
                                 }
                             )
+                        } else {
+                            // Show the user the actual answer if they've reached max guesses or won
+                            GuessRow(guess = viewModel.secretCode, locked = true)
                         }
                     }
                 }
