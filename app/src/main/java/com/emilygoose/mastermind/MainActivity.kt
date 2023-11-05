@@ -4,13 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.emilygoose.mastermind.ui.GuessRow
 import com.emilygoose.mastermind.ui.theme.MastermindTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,24 +26,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        for (guess in viewModel.guesses) {
+                            GuessRow(guess)
+                        }
+                    }
                 }
             }
         }
-    }
-}
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MastermindTheme {
-        Greeting("Android")
     }
 }
