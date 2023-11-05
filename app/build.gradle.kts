@@ -69,4 +69,7 @@ dependencies {
 
     // For viewmodels
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+
+    // Full icons
+    implementation("androidx.compose.material:material-icons-extended")
 }
