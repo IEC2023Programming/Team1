@@ -37,25 +37,25 @@ class MainActivityViewModel : ViewModel() {
     val secretCode: List<Color>? = null
     fun guess_score(guess: MutableList<Color>): Pair<Int, Int> {
         if (secretCode == null) {
-            Log.e("Fun: guess_secret", "Secret is null")
+            Log.e("fun: guess_secret", "Secret is null")
             return Pair(-1, -1)
         }
+        var tempSecret=secretCode.toMutableList()
         var black = 0
         var white = 0
         //If index and colour match - increment black by one and set given colour to unspecified
         for (i in 0..guess.size) {
-            if (guess[i] == secretCode[i]) {
+            if (guess[i] == tempSecret[i]) {
                 black++
-                guess[i] = Color.Unspecified
+                tempSecret[i] = Color.Unspecified
             }
         }
 
         //If colour is found - increment white by one and set given colour to unspecified
-        //Check this logic cause I don't trust myself at a glance??
         for (i in 0..guess.size) {
-            if (secretCode.indexOf(guess[i]) != -1) {
+            if (tempSecret.indexOf(guess[i]) != -1) {
                 white++
-                guess[i] = Color.Unspecified
+                tempSecret[tempSecret.indexOf(guess[i])]=Color.Unspecified
             }
         }
         guessCount++
