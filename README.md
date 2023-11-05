@@ -2,6 +2,13 @@
 
 Created for OTU IEC 2023
 
+# Table of Contents
+1. [Screenshots](#screenshots)
+2. [What it does](#what-it-does)
+3. [Tech used](#technology-we-used)
+4. [Improvements](#possible-improvements)
+
+## Screenshots
 |             Winning Message              |            Losing Message             |
 |:----------------------------------------:|:-------------------------------------:|
 | ![winning.jpg](screenshots/winning.jpg)) | ![losing.jpg](screenshots/losing.jpg) |
@@ -17,7 +24,7 @@ Our mobile implementation of the classic game Mastermind allows users to infinit
 
 Our team decided on creating an Android Application in Kotlin and Jetpack Compose. Our team has some experience in using Kotlin to develop Android apps which allowed us to develop a project with a proper GUI within the given time constraints. Using Compose to design the UI allowed us to quickly build out a responsive modular layout.
 Using Kotlin allowed us to follow an MVVM pattern to separate what the user views from the actual logic model.
-JUnit allowed us to write and execute test cases to confirm that the program’s output was working as intended.
+JUnit allowed us to write and execute test cases to confirm that the program’s internal logic was working as intended.
 
 ## Possible improvements
 Our implementation of mastermind could be further improved by adding the following:
