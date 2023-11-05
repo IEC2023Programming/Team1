@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.emilygoose.mastermind.ui.GuessRow
+import com.emilygoose.mastermind.ui.ResultAlertDialog
 import com.emilygoose.mastermind.ui.theme.MastermindTheme
 
 class MainActivity : ComponentActivity() {
@@ -71,6 +72,15 @@ class MainActivity : ComponentActivity() {
                                 GuessRow(guess = viewModel.secretCode, locked = true)
                             }
                         }
+                    }
+                }
+                when {
+                    !viewModel.canGuess.value -> {
+                        // Show alert dialog when the game is done
+                        ResultAlertDialog(
+                            onConfirmation = { viewModel.resetGame() },
+                            isWinner = viewModel.isWinner.value
+                        )
                     }
                 }
             }

@@ -24,6 +24,10 @@ class MainActivityViewModel : ViewModel() {
     var canGuess = mutableStateOf(true)
         private set
 
+    // Flag for if user has won the game
+    var isWinner = mutableStateOf(false)
+        private set
+
     init {
         // Generate the first secret code
         secretCode = generateSecret()
@@ -37,6 +41,8 @@ class MainActivityViewModel : ViewModel() {
         guesses.clear()
         // Generate a new secret code
         secretCode = generateSecret()
+        // Reset win flag
+        isWinner.value = false
         // Allow guessing
         canGuess.value = true
     }
@@ -64,6 +70,9 @@ class MainActivityViewModel : ViewModel() {
         // If game is won or if too many guesses, disable guessing
         if (guesses.size >= 10 || currentGuessColors == secretCode) {
             canGuess.value = false
+            if (currentGuessColors == secretCode) {
+                isWinner.value = true
+            }
         }
     }
 

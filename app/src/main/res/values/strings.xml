@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Mastermind</string>
+    <string name="winner_title">Winner!</string>
+    <string name="winner_body">Congrats! You guessed the code in time! See if you can get it faster!</string>
+
+    <string name="loser_title">You lost!</string>
+    <string name="loser_body">You weren\'t able to get the code in time. Try again!</string>
 </resources>
