@@ -30,22 +30,29 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         for (guess in viewModel.guesses) {
-                            GuessRow(guess, true)
+                            GuessRow(
+                                guess = guess,
+                                pegs = viewModel.getPegs(guess),
+                                locked = true
+                            )
                         }
-                        GuessRow(
-                            guess =
-                            // Map indices from the mutableList to colors
-                            viewModel.currentGuess.map { index ->
-                                GuessColor.values()[index]
-                            },
-                            locked = false,
-                            onColorClick = { index ->
-                                viewModel.incrementGuess(index)
-                            },
-                            onSubmit = {
-                                viewModel.submitGuess()
-                            }
-                        )
+                        // If we haven't reached 10 guesses, let the user guess
+                        if (viewModel.guesses.size < 10) {
+                            GuessRow(
+                                guess =
+                                // Map indices from the mutableList to colors
+                                viewModel.currentGuess.map { index ->
+                                    GuessColor.values()[index]
+                                },
+                                locked = false,
+                                onColorClick = { index ->
+                                    viewModel.incrementGuess(index)
+                                },
+                                onSubmit = {
+                                    viewModel.submitGuess()
+                                }
+                            )
+                        }
                     }
                 }
             }
