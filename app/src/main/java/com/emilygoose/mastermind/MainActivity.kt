@@ -15,7 +15,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.emilygoose.mastermind.data.GuessColor
 import com.emilygoose.mastermind.ui.GuessRow
 import com.emilygoose.mastermind.ui.theme.MastermindTheme
 
@@ -56,9 +55,7 @@ class MainActivity : ComponentActivity() {
                                 GuessRow(
                                     guess =
                                     // Map indices from the mutableList to colors
-                                    viewModel.currentGuess.map { index ->
-                                        GuessColor.values()[index]
-                                    },
+                                    viewModel.currentGuess.toColors(),
                                     locked = false,
                                     // Callback to increment guess colors on click
                                     onColorClick = { index ->

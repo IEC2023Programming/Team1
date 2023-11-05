@@ -3,10 +3,14 @@ package com.emilygoose.mastermind
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import com.emilygoose.mastermind.data.GuessColor
 
 class MainActivityViewModel : ViewModel() {
+    // Number of possible colors in the game
+    private val COLOR_SET = 6
+
     // Set of guesses - mutableListOf maintains order
     val guesses = mutableStateListOf<List<GuessColor>>()
 
@@ -42,7 +46,7 @@ class MainActivityViewModel : ViewModel() {
     fun incrementGuess(index: Int) {
         val currentColor = currentGuess[index]
         // Increment current colour, wrap around if above max index for guess colors
-        if (currentColor + 1 >= GuessColor.values().size) {
+        if (currentColor + 1 >= COLOR_SET) {
             Log.d("VM", "Incrementing index $index by 1, wrap to 0")
             currentGuess[index] = 0
         } else {
@@ -53,9 +57,7 @@ class MainActivityViewModel : ViewModel() {
 
     // Submits a guess to list of current guesses
     fun submitGuess() {
-        val currentGuessColors = currentGuess.map { index ->
-            GuessColor.values()[index]
-        }
+        val currentGuessColors = currentGuess.toColors()
         // Add list to guesses
         guesses.add(
             currentGuessColors
@@ -98,7 +100,16 @@ class MainActivityViewModel : ViewModel() {
 
     // Randomly generates a secret code
     fun generateSecret(): List<GuessColor> {
-        val guessList = GuessColor.values().toList().shuffled()
+        val guessList = GuessColor.values()
+            .toList()
+            .subList(0,COLOR_SET) // Take sublist of only first n colors
+            .shuffled()
         return guessList.subList(0, 4)
+    }
+}
+
+fun SnapshotStateList<Int>.toColors(): List<GuessColor> {
+    return this.map { index ->
+        GuessColor.values()[index]
     }
 }
