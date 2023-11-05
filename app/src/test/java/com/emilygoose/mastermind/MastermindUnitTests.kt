@@ -6,7 +6,7 @@ import org.junit.Test
 class MastermindUnitTests {
 
     // Set variables for test environment
-    private val secretCode = listOf(0, 5, 4, 3)
+    private val secretCode = listOf(1, 4, 2, 3)
     private val viewModel = MainActivityViewModel()
 
     @Test
@@ -35,8 +35,36 @@ class MastermindUnitTests {
     @Test
     fun guess_allWrong() {
         // Guess that is completely distinct from the secret code
-        val guess = listOf(1, 1, 1, 1)
+        val guess = listOf(0, 0, 0, 0)
         val resultPair = viewModel.getPegs(guess.toColors(), secretCode.toColors())
         assertEquals(resultPair, Pair(0, 0))
+    }
+
+    @Test
+    fun given_One() {
+        val guess = listOf(5, 6, 7, 8)
+        val resultPair = viewModel.getPegs(guess.toColors(), secretCode.toColors())
+        assertEquals(resultPair, Pair(0, 0))
+    }
+
+    @Test
+    fun given_Two() {
+        val guess = listOf(2, 2, 2, 2)
+        val resultPair = viewModel.getPegs(guess.toColors(), secretCode.toColors())
+        assertEquals(resultPair, Pair(1, 0))
+    }
+
+    @Test
+    fun given_Three() {
+        val guess = listOf(1, 2, 3, 4)
+        val resultPair = viewModel.getPegs(guess.toColors(), secretCode.toColors())
+        assertEquals(resultPair, Pair(1, 3))
+    }
+
+    @Test
+    fun given_Four() {
+        val guess = listOf(2, 2, 1, 1)
+        val resultPair = viewModel.getPegs(guess.toColors(), secretCode.toColors())
+        assertEquals(resultPair, Pair(0, 2))
     }
 }
