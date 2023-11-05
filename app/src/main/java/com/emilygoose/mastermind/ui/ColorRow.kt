@@ -6,20 +6,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.emilygoose.mastermind.GuessColor
 import com.emilygoose.mastermind.ui.theme.ColorDot
 
-@Preview
 @Composable
-fun ColorRow() {
+fun ColorRow(guesses: List<GuessColor>) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        for (i in 1..4) {
+        for (guessColor in guesses) {
             ColorDot(
-                color = Color.Cyan,
+                color = guessColor.color,
                 modifier = Modifier
                     .size(64.dp)
                     .padding(8.dp)
