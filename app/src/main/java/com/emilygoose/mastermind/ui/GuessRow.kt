@@ -8,7 +8,11 @@ import androidx.compose.ui.unit.dp
 import com.emilygoose.mastermind.GuessColor
 
 @Composable
-fun GuessRow(guess: List<GuessColor>) {
+fun GuessRow(
+    guess: List<GuessColor>,
+    locked: Boolean,
+    onColorClick: (Int) -> Unit = {}
+) {
     Row(
         modifier = Modifier.height(64.dp)
     ) {

@@ -12,16 +12,19 @@ import com.emilygoose.mastermind.GuessColor
 import com.emilygoose.mastermind.ui.theme.ColorDot
 
 @Composable
-fun ColorRow(colors: List<GuessColor>) {
+fun ColorRow(
+    colors: List<GuessColor>,
+    onColorClick: (Int) -> Unit = {}
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        for (guessColor in colors) {
+        for (index in colors.indices) {
             ColorDot(
-                color = guessColor.color,
+                color = colors[index].color,
                 modifier = Modifier
                     .size(64.dp)
-                    .padding(8.dp)
+                    .padding(8.dp),
             )
         }
     }
