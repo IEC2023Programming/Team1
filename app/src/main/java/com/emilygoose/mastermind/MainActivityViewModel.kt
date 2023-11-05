@@ -1,10 +1,13 @@
 package com.emilygoose.mastermind
 
+import android.util.Log
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 
-class MainActivityViewModel: ViewModel() {
+class MainActivityViewModel : ViewModel() {
     // Set of guesses - mutableListOf maintains order
     val guesses = mutableListOf<List<GuessColor>>()
+    var guessCount = 0
 
     // MutableState of current guess (Use indices so we can increment)
     val currentGuessIndices = mutableListOf(0, 0, 0, 0)
@@ -28,5 +31,33 @@ class MainActivityViewModel: ViewModel() {
         } else {
             currentGuessIndices[index] = currentColor + 1
         }
+    }
+
+    val secretCode: List<Color>? = null
+    fun guess_score(guess: MutableList<Color>): Pair<Int, Int> {
+        if (secretCode == null) {
+            Log.e("Fun: guess_secret", "Secret is null")
+            return Pair(-1, -1)
+        }
+        var black = 0
+        var white = 0
+        //If index and colour match - increment black by one and set given colour to unspecified
+        for (i in 0..guess.size) {
+            if (guess[i] == secretCode[i]) {
+                black++
+                guess[i] = Color.Unspecified
+            }
+        }
+
+        //If colour is found - increment white by one and set given colour to unspecified
+        //Check this logic cause I don't trust myself at a glance??
+        for (i in 0..guess.size) {
+            if (secretCode.indexOf(guess[i]) != -1) {
+                white++
+                guess[i] = Color.Unspecified
+            }
+        }
+        guessCount++
+        return Pair(black, white)
     }
 }
